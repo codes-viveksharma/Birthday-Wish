@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Birthday Message 🦚🪷</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif; /* Fallback font */
+        }
+
+        @font-face {
+            font-family: 'Ahsing';
+            src: url('Ahsing.ttf') format('truetype');
+        }
+
+        .wrapper {
+            height: 100vh;
+            background-image: url("sunshine.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-frame {
+            width: 85%;
+            max-width: 800px;
+            background-color: rgba(255, 210, 211, 0.92);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.2s ease, transform 1.2s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .message-content {
+            color: #333;
+            font-size: 1.15rem;
+            line-height: 1.8;
+            text-align: center;
+            font-family: 'Ahsing', 'Arial', sans-serif;
+        }
+
+        .birthday-title {
+            color: #d23c77;
+            font-size: 2.3rem;
+            margin-bottom: 25px;
+            text-align: center;
+            font-family: 'Ahsing', 'Arial', sans-serif;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        .para{
+            font-family: 'Ahsing', 'Arial', sans-serif;
+        }
+
+        .button-container {
+            margin-top: 30px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s ease 3s;
+        }
+
+        .next-button {
+            font-family: 'Ahsing', 'Arial', sans-serif;
+            background-color: #ffd2d3;
+            color: #333;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .next-button:hover {
+            background-color: #fcbaba;
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .show {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        /* Celebration Animations */
+        .confetti {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            opacity: 0;
+            z-index: 1;
+            animation: confettiFall 5s linear infinite;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .balloon {
+            position: absolute;
+            width: 45px;
+            height: 55px;
+            border-radius: 50%;
+            opacity: 0;
+            z-index: 1;
+            animation: balloonFloat 8s ease-in infinite;
+        }
+
+        @keyframes balloonFloat {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0.8; }
+            100% { transform: translateY(-150px) translateX(30px); opacity: 0; }
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 22px;
+            color: #ff6b6b;
+            opacity: 0;
+            z-index: 1;
+            animation: heartFloat 6s linear infinite;
+        }
+
+        @keyframes heartFloat {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0.7; }
+            100% { transform: translateY(-150px) translateX(40px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Custom Scrollbar */
+        .message-frame::-webkit-scrollbar {
+            width: 8px;
+        }
+        .message-frame::-webkit-scrollbar-track {
+            background: rgba(255, 185, 185, 0.3);
+            border-radius: 10px;
+        }
+        .message-frame::-webkit-scrollbar-thumb {
+            background: #d23c77;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper" id="wrapper">
+        <!-- Celebration Elements -->
+        <div id="confetti-container"></div>
+        <div id="balloon-container"></div>
+        <div id="heart-container"></div>
+        
+        <div class="message-frame" id="message-frame">
+            <div class="message-content">
+                <h1 class="birthday-title">Happy birthday 🎂🎊🎈🎉🥳</h1>
+                <p class="para">
+                    To my favorite person in the world, the most beautiful soul, and the strongest girl I’ve ever known—my panda, my sunshine ♥️. You are as sweet as your heart, as soft and kind as you are, sometimes silly and stubborn, but with so many adorable behaviors I can hardly handle. Above all, you are the one girl I’ve found who leaves me speechless. I don’t even have enough words to describe or tell you how precious you are to me, how amazing you are. You don’t have any idea how much I like you, how much I admire you. You don’t know how much my eyes adore you and smile for you. You’re one in a million, the star of my universe. 
+
+                    <br><br>
+                    From the depths of my heart, I love you just the way you are—the real you. Your perfections and imperfections, your strengths and weaknesses, your best and worst. I’m going to discover even more about you, and I will love every hidden side of you that you’ve never shown to anyone. I accept you as you truly are—the life and the sides of you that you feel so insecure about in this world. I don’t care whether you feel or not the same way about me as I feel about you. I just know that I Love you with my whole heart 💗.
+                
+                    <br>Happy Birthday #CUTO 👀🩷<br>
+                </p>
+                <div class="button-container" id="button-container">
+                    <button class="next-button" onclick="navigateToCake()">Let's Cut the Cake 🎂</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize page
+        window.onload = function() {
+            // Fade in wrapper
+            document.getElementById('wrapper').style.opacity = '1';
+            
+            // Create celebration elements
+            createConfetti();
+            createBalloons();
+            createHearts();
+            
+            // Animate message frame after delay
+            setTimeout(function() {
+                document.getElementById('message-frame').classList.add('show');
+            }, 500);
+            
+            // Show button after message appears
+            setTimeout(function() {
+                document.getElementById('button-container').classList.add('show');
+            }, 3500);
+        };
+
+        // Navigation function
+        function navigateToCake() {
+            const wrapper = document.getElementById('wrapper');
+            wrapper.style.opacity = '0';
+            setTimeout(function() {
+                window.location.href = 'cake.html'; // Change this to your next page
+            }, 1000);
+        }
+
+        // Celebration animation functions
+        function createConfetti() {
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'];
+            const container = document.getElementById('confetti-container');
+            
+            for (let i = 0; i < 120; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.width = (Math.random() * 8 + 6) + 'px';
+                confetti.style.height = (Math.random() * 8 + 6) + 'px';
+                confetti.style.animationDelay = (Math.random() * 5) + 's';
+                confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                container.appendChild(confetti);
+            }
+        }
+
+        function createBalloons() {
+            const colors = ['#ff6b6b', '#48dbfb', '#1dd1a1', '#feca57', '#5f27cd', '#ff9ff3'];
+            const container = document.getElementById('balloon-container');
+            
+            for (let i = 0; i < 25; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                balloon.style.left = Math.random() * 100 + 'vw';
+                balloon.style.animationDelay = (Math.random() * 8) + 's';
+                balloon.style.animationDuration = (Math.random() * 5 + 6) + 's';
+                
+                // Add balloon string
+                balloon.innerHTML = '<div style="position:absolute;bottom:-18px;left:50%;width:2px;height:18px;background:#ccc;transform:translateX(-50%)"></div>';
+                container.appendChild(balloon);
+            }
+        }
+
+        function createHearts() {
+            const container = document.getElementById('heart-container');
+            const heartStyles = ['❤️', '🧡', '💛', '💚', '💙', '💜'];
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = heartStyles[Math.floor(Math.random() * heartStyles.length)];
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = (Math.random() * 6) + 's';
+                heart.style.animationDuration = (Math.random() * 4 + 5) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 18) + 'px';
+                container.appendChild(heart);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Cut the cake 🎂</title>
+    <style>
+        /* General Styling */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url("cut the cake 🎂.jpg") no-repeat center/cover;
+            font-family: Arial, sans-serif;
+            transition: all 1s ease;
+        }
+
+        /* Cake and Knife */
+        .cake-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 400px;
+            z-index: 5;
+            transition: opacity 1.5s ease;
+        }
+
+        .cake {
+            position: absolute;
+            width: 400px;
+            height: 200px;
+            background: #f2789f;
+            border-radius: 10px;
+            left: 100px;
+            top: 100px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            transition: clip-path 1s ease;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .cake.cut {
+            clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+        }
+
+        .frosting {
+            position: absolute;
+            width: 100%;
+            height: 40px;
+            background: #fff;
+            border-radius: 50% 50% 0 0;
+            top: -20px;
+        }
+
+        .candle {
+            position: absolute;
+            width: 20px;
+            height: 60px;
+            background: #ffcc00;
+            left: 190px;
+            top: 30px;
+            border-radius: 5px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .flame {
+            position: absolute;
+            width: 15px;
+            height: 30px;
+            background: radial-gradient(ellipse at center, #ffff00 0%, #ff9900 70%);
+            top: -25px;
+            left: 2.5px;
+            border-radius: 50% 50% 20% 20%;
+            animation: flicker 0.8s infinite alternate;
+            box-shadow: 0 0 20px #ff9900;
+            transform-origin: center bottom;
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-2deg); opacity: 0.9; }
+            25% { transform: scale(1.05) rotate(0deg); opacity: 1; }
+            50% { transform: scale(0.95) rotate(2deg); opacity: 0.9; }
+            75% { transform: scale(1.02) rotate(-1deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 0.95; }
+        }
+
+        .knife {
+            position: absolute;
+            width: 180px;
+            height: 20px;
+            background: linear-gradient(to right, #ddd, #fff, #ddd);
+            border-radius: 5px;
+            top: 180px;
+            right: -200px;
+            transform: rotate(-20deg);
+            cursor: grab;
+            z-index: 20;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .knife:before {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            background: linear-gradient(to right, #aaa, #ccc);
+            left: -30px;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .knife:active {
+            cursor: grabbing;
+            transform: rotate(-15deg);
+        }
+
+        /* Cheer Text */
+        .cheer-text {
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 80px;
+            font-weight: bold;
+            color: #ff4081;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            opacity: 0;
+            z-index: 15;
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        /* Celebration Animation */
+        .celebration {
+            display: none;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .balloon, .confetti, .heart, .sparkle {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .balloon {
+            width: 80px;
+            height: 100px;
+            background: #ffcc00;
+            border-radius: 50%;
+            animation: balloon-float 8s ease-in forwards;
+        }
+
+        .confetti {
+            width: 12px;
+            height: 12px;
+            background: #ff4081;
+            animation: confetti-fall 5s linear forwards;
+        }
+
+        .heart {
+            font-size: 22px;
+            color: #ff6b6b;
+            animation: heart-float 6s linear forwards;
+        }
+
+        .sparkle {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle-pop 1s ease-out forwards;
+        }
+
+        @keyframes balloon-float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(-150px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        @keyframes heart-float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0.7; }
+            100% { transform: translateY(-150px) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes sparkle-pop {
+            0% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(3); opacity: 0; }
+        }
+
+        .button-container {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 1s ease 1s;
+        }
+
+        .next-button {
+            font-family: Arial, sans-serif;
+            background-color: #ffd2d3;
+            color: black;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .next-button:hover {
+            background-color: #fcbaba;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Pop-up */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 60px;
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            z-index: 50;
+            text-align: center;
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .popup.show {
+            opacity: 1;
+        }
+
+        .popup h2 {
+            font-size: 45px;
+            color: #ff4081;
+            margin-bottom: 20px;
+        }
+
+        .popup p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .popup button {
+            padding: 12px 24px;
+            font-size: 18px;
+            margin: 15px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: #ffd2d3;
+        }
+
+        .popup button:hover {
+            transform: scale(1.1);
+            background: #fcbaba;
+        }
+    </style>
+</head>
+<body>
+
+<div class="cake-container" id="cake-container">
+    <div class="cake" id="cake">
+        <div class="frosting"></div>
+        <div class="candle">
+            <div class="flame"></div>
+        </div>
+    </div>
+    <div class="knife" id="knife"></div>
+</div>
+
+<div class="cheer-text" id="cheer-text" style="font-family: 'Ahsing', 'Arial', sans-serif;">🎉 Cheers to 19 🎉</div>
+
+<div class="celebration" id="celebration"></div>
+
+<div class="button-container" id="button-container">
+    <button class="next-button" id="next-button" style="font-family: 'Ahsing', 'Arial', sans-serif;">Click here: I have to say something 🥹</button>
+</div>
+
+<div class="popup" id="popup" style="font-family: 'Ahsing', 'Arial', sans-serif;">
+    <h2>Dekho mera koi aisa intention nahi tha ki main iss din tumse ye cheez puchunga but still i'm asking you...</h2>
+    <p>Do you love me?👀</p>
+    <button id="yes-btn" style="font-family: 'Ahsing', 'Arial', sans-serif;">Yes 🥹</button>
+    <button id="no-btn" style="font-family: 'Ahsing', 'Arial', sans-serif;">No 💔</button>
+</div>
+
+<script>
+    const cake = document.getElementById('cake');
+    const knife = document.getElementById('knife');
+    const celebration = document.getElementById('celebration');
+    const cheerText = document.getElementById('cheer-text');
+    const buttonContainer = document.getElementById('button-container');
+    const nextButton = document.getElementById('next-button');
+    const popup = document.getElementById('popup');
+    const yesBtn = document.getElementById('yes-btn');
+    const noBtn = document.getElementById('no-btn');
+
+    let cakeCut = false;
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    // Initialize knife position
+    function initKnifePosition() {
+        const containerRect = document.querySelector('.cake-container').getBoundingClientRect();
+        knife.style.left = `${containerRect.right - 180}px`;
+        knife.style.top = `${containerRect.top + 180}px`;
+    }
+
+    // Celebration Effect
+    function createCelebration() {
+        celebration.style.display = 'block';
+        
+        // Create different celebration elements
+        const types = ['balloon', 'confetti', 'heart', 'sparkle'];
+        const colors = ['#ff4081', '#ffcc00', '#ff6b6b', '#4CAF50', '#2196F3', '#9C27B0'];
+        
+        for (let i = 0; i < 150; i++) {
+            const type = types[Math.floor(Math.random() * types.length)];
+            const element = document.createElement('div');
+            element.className = type;
+            
+            if (type === 'confetti' || type === 'sparkle') {
+                element.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            }
+            
+            if (type === 'heart') {
+                element.textContent = ['💖', '💕', '💗', '💓', '💞'][Math.floor(Math.random() * 5)];
+            }
+            
+            element.style.left = `${Math.random() * 100}vw`;
+            element.style.animationDelay = `${Math.random() * 5}s`;
+            element.style.animationDuration = `${3 + Math.random() * 7}s`;
+            
+            celebration.appendChild(element);
+            
+            // For sparkles, create them around the cake area
+            if (type === 'sparkle') {
+                element.style.left = `${50 + Math.random() * 20}vw`;
+                element.style.top = `${40 + Math.random() * 20}vh`;
+            }
+        }
+    }
+
+    // Cake cutting function
+    function cutCake() {
+        if (cakeCut) return;
+        cakeCut = true;
+        
+        cake.classList.add('cut');
+        cheerText.style.opacity = '1';
+        cheerText.style.transform = 'translateX(-50%) translateY(20px)';
+        
+        setTimeout(() => {
+            createCelebration();
+            buttonContainer.style.opacity = '1';
+        }, 1000);
+        
+        setTimeout(() => {
+            cheerText.style.opacity = '0';
+            cheerText.style.transform = 'translateX(-50%) translateY(-20px)';
+        }, 3000);
+    }
+
+    // Event listeners
+    knife.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        offsetX = e.clientX - knife.getBoundingClientRect().left;
+        offsetY = e.clientY - knife.getBoundingClientRect().top;
+        knife.style.cursor = 'grabbing';
+        knife.style.transition = 'none';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        
+        knife.style.left = `${e.clientX - offsetX}px`;
+        knife.style.top = `${e.clientY - offsetY}px`;
+        knife.style.right = 'auto';
+        
+        // Calculate angle based on movement
+        const angle = Math.atan2(e.movementY, e.movementX) * (180 / Math.PI);
+        knife.style.transform = `rotate(${angle - 90}deg)`;
+        
+        // Check if knife is cutting the cake
+        const cakeRect = cake.getBoundingClientRect();
+        const knifeRect = knife.getBoundingClientRect();
+        
+        if (knifeRect.left < cakeRect.right && 
+            knifeRect.right > cakeRect.left &&
+            knifeRect.top < cakeRect.bottom &&
+            knifeRect.bottom > cakeRect.top) {
+            cutCake();
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        isDragging = false;
+        knife.style.cursor = 'grab';
+        knife.style.transition = 'transform 0.3s ease';
+        
+        // Return knife to original position if not cut
+        if (!cakeCut) {
+            initKnifePosition();
+            knife.style.transform = 'rotate(-20deg)';
+        }
+    });
+
+    nextButton.addEventListener('click', () => {
+        popup.style.display = 'block';
+        setTimeout(() => {
+            popup.classList.add('show');
+        }, 10);
+    });
+    
+    yesBtn.addEventListener('click', () => {
+        window.location.href = 'yes.html';
+    });
+    
+    noBtn.addEventListener('click', () => {
+        window.location.href = 'no.html';
+    });
+
+    // Initialize positions
+    window.addEventListener('load', initKnifePosition);
+    window.addEventListener('resize', initKnifePosition);
+</script>
+
+</body>
+</html>

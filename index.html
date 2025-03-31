@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Snehuuu🦚🪷</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .wrapper {
+            height: 100vh;
+            background-image: url("sneha.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .button-container {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 1s ease 1s;
+        }
+
+        .next-button {
+            font-family: Arial, sans-serif;
+            background-color: #ffd2d3;
+            color: black;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .next-button:hover {
+            background-color: #fcbaba;
+            transform: scale(1.05);
+        }
+
+        .show {
+            opacity: 1 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper" id="wrapper">
+        <div class="button-container" id="button-container">
+            <button class="next-button" onclick="navigatePage()" style="font-family: 'Ahsing', 'Arial', sans-serif;">Let's Celebrate 🎀🎉</button>
+        </div>
+    </div>
+
+    <script>
+        window.onload = () => {
+            document.getElementById('wrapper').style.opacity = '1';
+            setTimeout(() => {
+                document.getElementById('button-container').classList.add('show');
+            }, 1000);
+        }
+
+        function navigatePage() {
+            const wrapper = document.getElementById('wrapper');
+            wrapper.style.opacity = '0';
+            setTimeout(() => {
+                window.location.href = 'next-page.html';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

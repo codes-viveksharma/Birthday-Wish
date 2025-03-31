@@ -1,0 +1,31 @@
+body {
+    background-color: #f1a7b0;
+    text-align: center;
+}
+
+.container {
+    position: relative;
+    margin: auto;
+}
+
+.cake-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.cake {
+    width: 300px;
+}
+
+.knife {
+    position: absolute;
+    width: 50px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.celebration {
+    display: none;
+    font-size: 2em;
+    margin-top: 20px;
+}
